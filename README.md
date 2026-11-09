@@ -1,4 +1,4 @@
-# Vértice — SOS Loja Virtual: Caça aos Bugs
+# Vértice: SOS Loja Virtual: Caça aos Bugs
 
 **Disciplina:** Desenvolvimento de Sistemas  
 **Modalidade:** atividade prática em equipe  
@@ -27,11 +27,11 @@ Em equipes, vocês deverão:
 
 | Chamado | Relato recebido |
 |---|---|
-| **INC-001 — Estoque impossível** | Um cliente conseguiu adicionar ao carrinho mais unidades de um produto do que a loja realmente possui. |
-| **INC-002 — Cupom suspeito** | O cupom promocional é aceito, mas o desconto calculado não corresponde ao anunciado. |
-| **INC-003 — Carrinho desatualizado** | Depois de algumas adições, a quantidade apresentada no carrinho deixa de acompanhar o que realmente foi registrado. |
-| **INC-004 — Produto fantasma** | Ao consultar um código de produto que não existe, a loja apresenta uma falha inesperada. |
-| **INC-005 — Pedido zumbi** | Um pedido cancelado continua aparecendo na lista de pedidos em aberto. |
+| **INC-001: Estoque impossível** | Um cliente conseguiu adicionar ao carrinho mais unidades de um produto do que a loja realmente possui. |
+| **INC-002: Cupom suspeito** | O cupom promocional é aceito, mas o desconto calculado não corresponde ao anunciado. |
+| **INC-003: Carrinho desatualizado** | Depois de algumas adições, a quantidade apresentada no carrinho deixa de acompanhar o que realmente foi registrado. |
+| **INC-004: Produto fantasma** | Ao consultar um código de produto que não existe, a loja apresenta uma falha inesperada. |
+| **INC-005: Pedido zumbi** | Um pedido cancelado continua aparecendo na lista de pedidos em aberto. |
 
 ## Regras de negócio da Vértice
 
