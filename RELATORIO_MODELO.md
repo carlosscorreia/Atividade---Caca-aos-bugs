@@ -66,3 +66,9 @@ Para cada incidente, registre de maneira objetiva:
 
 ## Reteste geral
 Descreva brevemente o que foi testado depois das correções para garantir que as demais funções continuam funcionando.
+
+1. **Fluxo de compras e estoque:** Adicionamos produtos variados, testamos os limites de estoque unitário e acumulado, verificamos o cálculo de subtotal e finalizamos compras.
+2. **Frete e cupons:** Testamos compras abaixo de R$ 300,00 (frete R$ 18,90) e acima de R$ 300,00 (frete grátis), além de testar o cupom `BEMVINDO10` e cupons inválidos.
+3. **Cancelamento de pedidos e devolução de estoque:** Cancelamos pedidos e confirmamos que eles somem da lista de pedidos em aberto, permanecem no histórico completo e o estoque dos produtos volta a ficar disponível no catálogo.
+4. **Consulta de produtos:** Testamos a busca por códigos existentes e inexistentes, confirmando os retornos 200 e 404.
+5. **Testes automatizados:** Executamos a classe `LojaTest` para garantir que todas as regras de negócio continuam funcionando conforme o esperado.
