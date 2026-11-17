@@ -25,7 +25,7 @@ public class LojaService {
     private void adicionar(Produto produto) { catalogo.put(produto.getId(), produto); }
 
     public synchronized List<Produto> listarProdutos() { return new ArrayList<>(catalogo.values()); }
-    public synchronized Produto buscarProduto(int id) { return catalogo.get(id); }
+    public synchronized Produto buscarProduto(int id) { return produtoOuErro(id); }
 
     public synchronized void adicionarAoCarrinho(int produtoId, int quantidade) {
         Produto produto = produtoOuErro(produtoId);
