@@ -75,6 +75,12 @@ public class LojaService {
         }
         int desconto = precoService.desconto(subtotal, cupom);
         int frete = precoService.frete(subtotal);
+        for (Map.Entry<Integer, Integer> item : carrinho.entrySet()) {
+            Produto produto = produtoOuErro(item.getKey());
+            if (produto.getEstoque() < item.getValue()) {
+                throw new ErroNegocio(409, "Quantidade indisponível no estoque para o produto: " + produto.getNome());
+            }
+        }
         Pedido pedido = new Pedido(proximoPedido++, itens, subtotal - desconto + frete, new LinkedHashMap<>(carrinho));
         for (Map.Entry<Integer, Integer> item : carrinho.entrySet()) {
             produtoOuErro(item.getKey()).diminuirEstoque(item.getValue());
