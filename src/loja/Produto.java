@@ -30,8 +30,15 @@ public class Produto {
     public String getTom() { return tom; }
     public int getPrecoCentavos() { return precoCentavos; }
     public int getEstoque() { return estoque; }
-    public void diminuirEstoque(int unidades) { estoque -= unidades; }
-    public void devolverAoEstoque(int unidades) { estoque += unidades; }
+    public void diminuirEstoque(int unidades) {
+        if (unidades <= 0) throw new ErroNegocio(400, "Quantidade deve ser positiva.");
+        if (estoque < unidades) throw new ErroNegocio(409, "Estoque insuficiente.");
+        estoque -= unidades;
+    }
+    public void devolverAoEstoque(int unidades) {
+        if (unidades <= 0) throw new ErroNegocio(400, "Quantidade deve ser positiva.");
+        estoque += unidades;
+    }
 
     public String toJson() {
         return "{\"id\":" + id + ",\"nome\":" + Json.entreAspas(nome) +
