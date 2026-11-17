@@ -18,10 +18,15 @@ Para cada incidente, registre de maneira objetiva:
 
 ## INC-002
 - Como reproduzimos:
+  Adicionamos o Headset Pixel (R$ 179,90) ao carrinho e finalizamos a compra preenchendo o cupom `BEMVINDO10`.
 - O que observamos:
+  No resumo do pedido, o desconto aplicado foi de apenas R$ 1,79 (1%), totalizando R$ 197,01 com o frete, em vez do desconto esperado de 10% (R$ 17,99).
 - Causa identificada:
+  Em `PrecoService.java` (linha 9), o método `desconto` calculava `subtotalCentavos / 100`. Dividir por 100 calcula 1% do valor e não 10%.
 - O que alteramos:
+  Corrigimos a fórmula para `return (subtotalCentavos * 10) / 100;`.
 - Como comprovamos a correção:
+  Fizemos o checkout usando o cupom `BEMVINDO10` e conferimos o valor retornado. O desconto sobre R$ 179,90 passou a ser de exatamente R$ 17,99 (1799 centavos), gerando o total correto.
 
 ## INC-003
 - Como reproduzimos:
