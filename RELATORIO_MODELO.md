@@ -54,10 +54,15 @@ Para cada incidente, registre de maneira objetiva:
 
 ## INC-005
 - Como reproduzimos:
+  Fizemos um pedido na loja, abrimos a aba "Meus pedidos" na visualização "Em aberto" e clicamos em "Cancelar pedido".
 - O que observamos:
+  O pedido foi cancelado no backend, mas continuou aparecendo na lista da aba "Em aberto", apenas com a etiqueta "Cancelado".
 - Causa identificada:
+  No método `listarPedidos` em `LojaService.java` (linha 90), a filtragem de pedidos ativos usava `.filter(pedido -> pedido.getStatus() != Pedido.Status.ENTREGUE)`. Como os status possíveis são `EM_ABERTO`, `CANCELADO` e `ENTREGUE`, pedidos cancelados continuavam sendo retornados.
 - O que alteramos:
+  Ajustamos o filtro para aceitar estritamente pedidos abertos: `.filter(pedido -> pedido.getStatus() == Pedido.Status.EM_ABERTO)`.
 - Como comprovamos a correção:
+  Cancelamos um pedido aberto e conferimos que ele desapareceu na hora da lista "Em aberto", e continuou aparecendo normalmente na aba "Todos os pedidos" com status Cancelado.
 
 ## Reteste geral
 Descreva brevemente o que foi testado depois das correções para garantir que as demais funções continuam funcionando.
