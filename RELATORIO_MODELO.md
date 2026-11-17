@@ -1,15 +1,20 @@
 # Registro de investigação — SOS Loja Virtual
 
-Equipe: __________________________________________
+Equipe: Carlos Eduardo
 
 Para cada incidente, registre de maneira objetiva:
 
 ## INC-001
 - Como reproduzimos:
+  Escolhemos o Mouse Orbit (ID 2), que tem estoque inicial de 3 unidades. Clicamos em "+ Adicionar" duas vezes seguidas no produto (ou enviamos duas requisições POST para `/api/cart/items` com quantidade 2). Depois, clicamos em finalizar compra.
 - O que observamos (tela, Network, debugger ou logs):
+  A requisição foi aceita nas duas vezes com status 200 no Network. O carrinho acumulou 4 unidades, ultrapassando o estoque disponível de 3. Ao finalizar a compra, o estoque do produto ficou negativo (-1).
 - Causa identificada:
+  No método `adicionarAoCarrinho` em `LojaService.java` (linha 35), o `if` comparava apenas a variável `quantidade` (o incremento da requisição atual) com o estoque, em vez de comparar a quantidade acumulada (`quantidadeNova = quantidadeAtual + quantidade`).
 - O que alteramos:
+  Alteramos a validação para `if (quantidadeNova > produto.getEstoque())`. Também adicionamos verificações defensivas em `finalizarCompra` e no método `diminuirEstoque` da classe `Produto` para evitar estoque negativo.
 - Como comprovamos a correção:
+  Tentamos adicionar 2 unidades duas vezes seguidas. Na segunda vez, a requisição retornou status 409 com a mensagem "Quantidade indisponível no estoque." e o carrinho não permitiu exceder as 3 unidades disponíveis.
 
 ## INC-002
 - Como reproduzimos:
