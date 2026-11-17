@@ -93,7 +93,7 @@ public class LojaService {
     public synchronized List<Pedido> listarPedidos(boolean apenasAtivos) {
         if (!apenasAtivos) return new ArrayList<>(pedidos);
         return pedidos.stream()
-                .filter(pedido -> pedido.getStatus() != Pedido.Status.ENTREGUE)
+                .filter(pedido -> pedido.getStatus() == Pedido.Status.EM_ABERTO)
                 .collect(Collectors.toList());
     }
 
