@@ -111,10 +111,9 @@ async function refreshCart() {
 }
 
 async function addProduct(productId) {
-  const alreadyListed = state.cart.items.some(item => item.produtoId === productId);
   try {
     await post('/api/cart/items', { produtoId: productId, quantidade: 1 });
-    if (!alreadyListed) await refreshCart();
+    await refreshCart();
     toast('Produto adicionado ao carrinho.');
   } catch (error) { toast(error.message, true); }
 }
