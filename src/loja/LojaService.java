@@ -32,7 +32,7 @@ public class LojaService {
         if (quantidade <= 0) throw new ErroNegocio(400, "A quantidade deve ser positiva.");
         int quantidadeAtual = carrinho.getOrDefault(produtoId, 0);
         int quantidadeNova = quantidadeAtual + quantidade;
-        if (quantidade > produto.getEstoque()) {
+        if (quantidadeNova > produto.getEstoque()) {
             throw new ErroNegocio(409, "Quantidade indisponível no estoque.");
         }
         carrinho.put(produtoId, quantidadeNova);
