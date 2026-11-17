@@ -166,7 +166,7 @@ async function refreshOrders() {
 async function cancelOrder(orderId) {
   try {
     await post(`/api/orders/${orderId}/cancel`);
-    await refreshOrders();
+    await Promise.all([refreshOrders(), refreshProducts()]);
     toast(`Pedido #${orderId} cancelado.`);
   } catch (error) { toast(error.message, true); }
 }
