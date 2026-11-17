@@ -6,7 +6,7 @@ public class PrecoService {
 
     public int desconto(int subtotalCentavos, String cupom) {
         if (cupom != null && cupom.trim().equalsIgnoreCase("BEMVINDO10")) {
-            return subtotalCentavos / 100;
+            return (subtotalCentavos * 10) / 100;
         }
         return 0;
     }
