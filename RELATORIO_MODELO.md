@@ -42,10 +42,15 @@ Para cada incidente, registre de maneira objetiva:
 
 ## INC-004
 - Como reproduzimos:
+  Digitamos um código inexistente (como `999`) no campo "Consultar produto por código" e clicamos em "Consultar", ou fizemos uma requisição direta para `GET /api/products/999`.
 - O que observamos:
+  O terminal do servidor imprimiu um erro de `NullPointerException` e retornou resposta HTTP 500. Na interface apareceu a mensagem "Não foi possível consultar: Ocorreu um erro interno.".
 - Causa identificada:
+  Em `LojaService.java` (linha 28), o método `buscarProduto` retornava `null` quando o produto não existia. Em `Main.java` (linha 61), o servidor chamava `produto.toJson()` diretamente sobre a variável nula, disparando o `NullPointerException`.
 - O que alteramos:
+  Em `LojaService.java`, fizemos `buscarProduto` chamar `produtoOuErro(id)`, que já lança a exceção de negócio com status 404. Em `Main.java`, também adicionamos uma checagem defensiva de nulidade retornando 404.
 - Como comprovamos a correção:
+  Consultamos novamente o código 999. O servidor respondeu com status HTTP 404 e corpo `{"erro":"Produto não encontrado."}`, exibindo a mensagem amigável na tela sem gerar nenhum erro interno no terminal.
 
 ## INC-005
 - Como reproduzimos:
