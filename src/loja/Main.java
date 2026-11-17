@@ -58,6 +58,9 @@ public class Main {
         }
         if (metodo.equals("GET") && partes.length == 3 && partes[1].equals("products")) {
             Produto produto = loja.buscarProduto(Integer.parseInt(partes[2]));
+            if (produto == null) {
+                throw new ErroNegocio(404, "Produto não encontrado.");
+            }
             responderJson(exchange, 200, produto.toJson());
             return;
         }
