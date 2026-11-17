@@ -30,10 +30,15 @@ Para cada incidente, registre de maneira objetiva:
 
 ## INC-003
 - Como reproduzimos:
+  Na página inicial da loja, clicamos no botão "+ Adicionar" do Headset Pixel. O carrinho abriu indicando 1 unidade. Em seguida, clicamos novamente no botão "+ Adicionar" do mesmo produto.
 - O que observamos:
+  A mensagem toast de produto adicionado apareceu na tela, mas o número no botão do carrinho continuou como "1", a gaveta do carrinho continuou marcando "Quantidade: 1" e o subtotal não mudou. Os valores só atualizavam se a página fosse recarregada (F5).
 - Causa identificada:
+  No arquivo `web/app.js` (linha 117), a função `addProduct` tinha a condição `if (!alreadyListed) await refreshCart();`. Como o produto já estava na lista na segunda adição, `alreadyListed` era `true` e a função nunca chamava `refreshCart()`.
 - O que alteramos:
+  Removemos a condição `if (!alreadyListed)` de `addProduct`, chamando `await refreshCart()` sempre que um item for adicionado com sucesso.
 - Como comprovamos a correção:
+  Clicamos várias vezes no botão de adicionar do mesmo produto e verificamos que o contador do topo, o título do carrinho, a quantidade do item e o subtotal atualizam na hora, sem precisar recarregar a página.
 
 ## INC-004
 - Como reproduzimos:
